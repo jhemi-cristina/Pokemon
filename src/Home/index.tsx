@@ -1,11 +1,19 @@
-import { Grid } from "@mui/material";
-import { Card } from "../Components/Card";
+import { Container, HeaderPage, Image, Title } from "./styles";
+import Logo from "Assets/logo.svg";
 
 const Home = () => {
   return (
-    <Grid container>
-      <Card>teste</Card>
-    </Grid>
+    <Container>
+      <HeaderPage>
+        <Image
+          src={Logo}
+          alt="Logo do Pokemon com a cor amarela e bordas azuis"
+          className="logo"
+        />
+
+        <Title>Lista de Pokemons</Title>
+      </HeaderPage>
+    </Container>
   );
 };
 
