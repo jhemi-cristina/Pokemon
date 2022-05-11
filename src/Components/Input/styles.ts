@@ -1,5 +1,5 @@
 import styled from "styled-components";
 
-export const CardItem = styled.div`
+export const InputItem = styled.input`
   border-radius: 5px;
 `;

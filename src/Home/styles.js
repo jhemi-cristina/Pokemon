@@ -2,8 +2,8 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   background-color: #323232;
-  min-height: 95vh;
-  padding: 20px;
+  min-height: 90vh;
+  padding: 40px;
 `;
 
 export const HeaderPage = styled.div``;
@@ -19,4 +19,17 @@ export const Title = styled.h1`
   display: flex;
   justify-content: center;
   margin-top: 40px;
+`;
+
+export const Content = styled.div`
+  background-color: #c4c4c4;
+  /* padding: 20px; */
+  border-radius: 6px;
+  margin-top: 40px;
+  min-height: 300px;
+`;
+
+export const PokeList = styled.div`
+  display: flex;
+  flex-wrap: wrap;
 `;
