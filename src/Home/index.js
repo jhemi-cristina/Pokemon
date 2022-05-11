@@ -13,7 +13,6 @@ import {
   Image,
   PokeList,
   SectionRight,
-  SectionSearch,
   Title,
 } from "./styles";
 import { Link } from "react-router-dom";
@@ -24,7 +23,6 @@ const Home = () => {
   const [prevPage, setPrevPage] = useState("?offset=0&limit=50");
   const [previous, setPrevious] = useState(null);
   const [advance, setAdvance] = useState("?offset=50&limit=50");
-  const [search, setSearch] = useState("");
 
   async function getPrevPokemons() {
     const {
@@ -57,6 +55,7 @@ const Home = () => {
 
   useEffect(() => {
     getNextPokemons();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

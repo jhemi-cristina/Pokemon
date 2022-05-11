@@ -1,6 +1,5 @@
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import {
-  Ability,
   AbilityList,
   AbilityListItem,
   Container,
