@@ -27,7 +27,7 @@ const Home = () => {
   async function getPrevPokemons() {
     const {
       data: { results, previous, next },
-    } = await api.get(`/${prevPage}`);
+    } = await api.get(`/pokemon/${prevPage}`);
     setPokemons(results);
     setPrevious(previous);
     setNextPage(next);
@@ -36,7 +36,7 @@ const Home = () => {
   async function getNextPokemons() {
     const {
       data: { results, previous, next },
-    } = await api.get(`/${advance}`);
+    } = await api.get(`/pokemon/${advance}`);
     setPokemons(results);
     setPrevious(previous);
     setNextPage(next);

@@ -15,12 +15,12 @@ import {
   Title,
 } from "./styles";
 import Logo from "Assets/logo.svg";
-import pokemon from "Assets/pokemon.svg";
 import { Link, useParams } from "react-router-dom";
 import { useEffect, useMemo, useState } from "react";
 import { api, apiImages } from "Services/api";
 import { convertName } from "./Functions/convertName";
 import { getAbilities } from "./Functions/getAbilities";
+import { getVariations } from "./Functions/getVariations";
 
 const Details = () => {
   const { name } = useParams();
@@ -28,9 +28,11 @@ const Details = () => {
   const [pokeId, setPokeId] = useState(null);
   const [pokeImage, setPokeImage] = useState(null);
   const [abilities, setAbilities] = useState(null);
+  const [variations, setVariations] = useState(null);
+  const [variationsList, setVariationsList] = useState(null);
 
   async function getPokemonData() {
-    const response = await api.get(`/${name}`);
+    const response = await api.get(`/pokemon/${name}`);
 
     setPokemon(response.data);
     setPokeId(response.data.id);
@@ -41,12 +43,27 @@ const Details = () => {
     getPokemonData();
   }, []);
 
+  async function getPokemonsVariantions() {
+    const response = await api.get(`/evolution-chain/${pokeId}`);
+    setVariations(response?.data.chain.evolves_to);
+    // console.log("response", response.data);
+  }
+
   useMemo(() => {
     if (pokeId) {
       setPokeImage(`${apiImages}/${pokeId}.svg`);
       setAbilities(getAbilities(pokemon));
+      getPokemonsVariantions();
     }
   }, [pokeId, pokemon]);
+
+  useMemo(() => {
+    if (pokeId && variations) {
+      setVariationsList(getVariations(variations));
+    }
+  }, [variations]);
+
+  console.log("variationsList", variationsList);
 
   return (
     <Container>
@@ -88,6 +105,14 @@ const Details = () => {
             <SubTitle>HABILIDADES:</SubTitle>
             <AbilityList>
               {abilities?.map((item) => (
+                <AbilityListItem key={item?.id}>{item?.name}</AbilityListItem>
+              ))}
+            </AbilityList>
+            {variationsList?.length !== 0 ? (
+              <SubTitle>Variações:</SubTitle>
+            ) : null}
+            <AbilityList>
+              {variationsList?.map((item) => (
                 <AbilityListItem key={item?.id}>{item?.name}</AbilityListItem>
               ))}
             </AbilityList>
