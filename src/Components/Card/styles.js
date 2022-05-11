@@ -5,6 +5,6 @@ export const CardItem = styled.div`
   padding: ${(props) => props?.padding ?? "10px"};
   margin: ${(props) =>
     props.margin ? `${props.margin}!important` : "10px 0px"};
-  width: ${(props) => props?.width ?? "340px"};
-  border-radius: 5px;
+  width: ${(props) => props?.width ?? "330px"};
+  border-radius: 3px;
 `;

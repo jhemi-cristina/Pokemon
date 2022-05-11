@@ -23,13 +23,25 @@ export const Title = styled.h1`
 
 export const Content = styled.div`
   background-color: #c4c4c4;
-  /* padding: 20px; */
+  padding: 40px;
   border-radius: 6px;
   margin-top: 40px;
   min-height: 300px;
+
+  Input {
+    justify-content: flex-end;
+    margin-bottom: 40px;
+  }
 `;
 
 export const PokeList = styled.div`
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-between;
+  margin-bottom: 50px;
+`;
+
+export const SectionRight = styled.div`
+  display: flex;
+  justify-content: right;
 `;

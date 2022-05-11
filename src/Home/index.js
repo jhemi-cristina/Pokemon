@@ -1,18 +1,22 @@
+import { api } from "Services/api";
 import { useState, useEffect } from "react";
+import { useMemo } from "react";
+import { Input } from "Components/Input";
+import { Card } from "Components/Card";
+import { getParamsPage } from "./Functions/getParamsPage";
+import Logo from "Assets/logo.svg";
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import {
   Container,
   Content,
   HeaderPage,
   Image,
   PokeList,
+  SectionRight,
+  SectionSearch,
   Title,
 } from "./styles";
-import { Input } from "Components/Input";
-import { Card } from "Components/Card";
-import Logo from "Assets/logo.svg";
-import { api } from "Services/api";
-import { getParamsPage } from "./Functions/getParamsPage";
-import { useMemo } from "react";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const [pokemons, setPokemons] = useState([]);
@@ -20,6 +24,7 @@ const Home = () => {
   const [prevPage, setPrevPage] = useState("?offset=0&limit=50");
   const [previous, setPrevious] = useState(null);
   const [advance, setAdvance] = useState("?offset=50&limit=50");
+  const [search, setSearch] = useState("");
 
   async function getPrevPokemons() {
     const {
@@ -67,27 +72,31 @@ const Home = () => {
       </HeaderPage>
 
       <Content>
-        <Input />
+        <SectionRight>
+          <Input placeholder="Pesquise o Pokemon desejado...." />
+        </SectionRight>
 
         <PokeList>
           {pokemons?.map((item, index) => (
-            <Card key={index} margin="20px">
-              {item["name"]}
-            </Card>
+            <Link to="/details" key={index}>
+              <Card className="poke-item">{item["name"]}</Card>
+            </Link>
           ))}
         </PokeList>
-        <button
-          onClick={() => getPrevPokemons()}
-          disabled={prevPage === "?offset=0&limit=50"}
-        >
-          {"<"}
-        </button>
-        <button
-          onClick={() => getNextPokemons()}
-          disabled={advance === "?offset=1100&limit=26"}
-        >
-          {">"}
-        </button>
+        <SectionRight>
+          <button
+            onClick={() => getPrevPokemons()}
+            disabled={prevPage === "?offset=0&limit=50"}
+          >
+            <FaArrowLeft />
+          </button>
+          <button
+            onClick={() => getNextPokemons()}
+            disabled={advance === "?offset=1100&limit=26"}
+          >
+            <FaArrowRight />
+          </button>
+        </SectionRight>
       </Content>
     </Container>
   );
