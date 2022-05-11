@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export const Container = styled.div`
   background-color: #323232;
@@ -35,7 +36,7 @@ export const Content = styled.div`
 `;
 
 export const Title = styled.h1`
-  margin-bottom: 30px;
+  margin-bottom: 70px;
   font-size: 50px;
   color: #ffcb05;
 `;
@@ -54,7 +55,8 @@ export const Description = styled.div`
 
 export const PokeImage = styled.img`
   border-radius: 20px;
-  max-width: 100%;
+  max-width: 300px;
+  width: 100%;
 `;
 
 export const PokeBox = styled.div`

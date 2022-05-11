@@ -77,7 +77,7 @@ const Home = () => {
 
         <PokeList>
           {pokemons?.map((item, index) => (
-            <Link to="/details" key={index}>
+            <Link to={`/details/${item.name}`} key={index}>
               <Card className="poke-item">{item["name"]}</Card>
             </Link>
           ))}
