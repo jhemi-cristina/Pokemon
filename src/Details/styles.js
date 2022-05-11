@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 
 export const Container = styled.div`
   background-color: #323232;
@@ -61,6 +60,12 @@ export const PokeImage = styled.img`
 
 export const PokeBox = styled.div`
   color: #ffffff;
+
+  svg {
+    display: flex;
+    margin: 0 auto;
+    margin-top: 50px;
+  }
 `;
 
 export const AbilityList = styled.ul`

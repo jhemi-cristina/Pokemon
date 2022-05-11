@@ -7,7 +7,7 @@ const Routes = () => {
     <>
       <Router>
         <Route path="/" element={<Home />} />
-        <Route path="/details/:name" element={<Details />} />
+        <Route path="/details/:id" element={<Details />} />
       </Router>
     </>
   );
