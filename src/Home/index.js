@@ -11,28 +11,49 @@ import { Input } from "Components/Input";
 import { Card } from "Components/Card";
 import Logo from "Assets/logo.svg";
 import { api } from "Services/api";
+import { getParamsPage } from "./Functions/getParamsPage";
+import { useMemo } from "react";
 
 const Home = () => {
   const [pokemons, setPokemons] = useState([]);
   const [nextPage, setNextPage] = useState(null);
-  const [previPage, setPreviPage] = useState(null);
+  const [prevPage, setPrevPage] = useState("?offset=0&limit=50");
+  const [previous, setPrevious] = useState(null);
+  const [advance, setAdvance] = useState("?offset=50&limit=50");
 
-  // previous e next São as páginas anterior e proxima
-
-  async function getPokemons() {
+  async function getPrevPokemons() {
     const {
       data: { results, previous, next },
-    } = await api.get("/?offset=50&limit=50");
+    } = await api.get(`/${prevPage}`);
     setPokemons(results);
+    setPrevious(previous);
     setNextPage(next);
-    setPreviPage(previous);
   }
 
-  console.log("pokeResponse", pokemons);
+  async function getNextPokemons() {
+    const {
+      data: { results, previous, next },
+    } = await api.get(`/${advance}`);
+    setPokemons(results);
+    setPrevious(previous);
+    setNextPage(next);
+  }
+
+  useMemo(() => {
+    if (nextPage) setAdvance(getParamsPage(nextPage));
+  }, [nextPage]);
+
+  useMemo(() => {
+    if (previous) setPrevPage(getParamsPage(previous));
+  }, [previous]);
+
+  // console.log("previous", previous);
+  // console.log("nextPage", nextPage);
 
   useEffect(() => {
-    getPokemons();
+    getNextPokemons();
   }, []);
+
   return (
     <Container>
       <HeaderPage>
@@ -49,12 +70,24 @@ const Home = () => {
         <Input />
 
         <PokeList>
-          {pokemons.map((item, index) => (
+          {pokemons?.map((item, index) => (
             <Card key={index} margin="20px">
               {item.name}
             </Card>
           ))}
         </PokeList>
+        <button
+          onClick={() => getPrevPokemons()}
+          disabled={prevPage === "?offset=0&limit=50"}
+        >
+          {"<"}
+        </button>
+        <button
+          onClick={() => getNextPokemons()}
+          disabled={advance === "?offset=1100&limit=26"}
+        >
+          {">"}
+        </button>
       </Content>
     </Container>
   );
