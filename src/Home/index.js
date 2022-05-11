@@ -72,7 +72,7 @@ const Home = () => {
         <PokeList>
           {pokemons?.map((item, index) => (
             <Card key={index} margin="20px">
-              {item.name}
+              {item["name"]}
             </Card>
           ))}
         </PokeList>
