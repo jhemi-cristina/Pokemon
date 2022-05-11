@@ -2,13 +2,14 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   background-color: #323232;
-  min-height: 100vh;
+  min-height: 60vh;
   padding: 60px;
 `;
 
 export const HeaderPage = styled.div`
   display: flex;
   justify-content: space-between;
+  margin-bottom: 50px;
 `;
 
 export const PageLink = styled.div`
@@ -33,9 +34,15 @@ export const Content = styled.div`
   margin-bottom: 50px;
 `;
 
-export const Title = styled.h1``;
+export const Title = styled.h1`
+  margin-bottom: 30px;
+  font-size: 50px;
+  color: #ffcb05;
+`;
 
-export const SubTitle = styled.h2``;
+export const SubTitle = styled.h2`
+  margin-bottom: 30px;
+`;
 
 export const Description = styled.div`
   display: flex;
@@ -50,11 +57,17 @@ export const PokeImage = styled.img`
   max-width: 100%;
 `;
 
-export const PokeBox = styled.div``;
+export const PokeBox = styled.div`
+  color: #ffffff;
+`;
 
-export const AbilityList = styled.ul``;
+export const AbilityList = styled.ul`
+  padding-left: 15px;
+`;
 
-export const AbilityListItem = styled.li``;
+export const AbilityListItem = styled.li`
+  line-height: 40px;
+`;
 
 export const Footer = styled.div`
   opacity: 0.5;
