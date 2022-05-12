@@ -7,17 +7,25 @@ export const Container = styled.div`
 `;
 
 export const HeaderPage = styled.div`
+  /* display: flex;
+  /* justify-content: space-between; */
+  /*margin-bottom: 30px; */
+
   display: flex;
   justify-content: space-between;
-  margin-bottom: 30px;
+  align-items: center;
+  margin-bottom: 101px;
 `;
 
 export const PageLink = styled.div`
   display: flex;
+  margin: 0;
+  padding: 0;
+  justify-content: right;
+  /* display: flex;
   align-items: center;
-  justify-content: center;
   color: #ffffff;
-  font-size: 15px;
+  font-size: 15px; */
 
   svg {
     margin-right: 15px;
@@ -36,9 +44,10 @@ export const Content = styled.div`
 `;
 
 export const Title = styled.h1`
-  margin-bottom: 50px;
-  font-size: 50px;
+  margin-bottom: 70px;
+  font-size: 40px;
   color: #ffcb05;
+  text-align: center;
 `;
 
 export const SubTitle = styled.h2`
@@ -47,9 +56,12 @@ export const SubTitle = styled.h2`
 
 export const Description = styled.div`
   display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 200px;
 
   div {
-    min-width: 50%;
+    min-width: 20%;
   }
 `;
 
@@ -77,6 +89,4 @@ export const AbilityListItem = styled.li`
   line-height: 40px;
 `;
 
-export const ImageLogo = styled.div`
-  /* opacity: 0.5; */
-`;
+export const ImageLogo = styled.div``;

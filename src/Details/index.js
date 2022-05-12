@@ -6,7 +6,6 @@ import {
   Container,
   Content,
   Description,
-  Footer,
   HeaderPage,
   Image,
   ImageLogo,
@@ -25,8 +24,9 @@ import { getAbilities } from "./Functions/getAbilities";
 import { getVariations } from "./Functions/getVariations";
 import { Loader } from "Components/Loader";
 import { loaderImage } from "./Functions/loader";
+import { pokeball } from "Assets/pokeball.png";
 
-const Details = () => {
+function Details() {
   const { id } = useParams();
   const [pokemon, setPokemon] = useState({});
   const [pokeImage, setPokeImage] = useState(null);
@@ -41,6 +41,7 @@ const Details = () => {
     setPokemon(response.data);
   }
   // console.log("DAta", pokemon);
+  console.log("variationsList", variationsList);
 
   useEffect(() => {
     getPokemonData();
@@ -72,16 +73,17 @@ const Details = () => {
 
   return (
     <Container>
-      <ImageLogo>
-        <Link to="/">
-          <Image
-            src={Logo}
-            alt="Logo do Pokemon com a cor amarela e bordas azuis"
-            className="logo"
-          />
-        </Link>
-      </ImageLogo>
       <HeaderPage>
+        <ImageLogo>
+          <Link to="/">
+            <Image
+              src={Logo}
+              alt="Logo do Pokemon com a cor amarela e bordas azuis"
+              className="logo"
+            />
+          </Link>
+        </ImageLogo>
+
         <PageLink>
           <Link to={`/details/${Number(id) - 1}`}>
             <button disabled={id === "1"} onClick={() => pageReplace()}>
@@ -138,6 +140,6 @@ const Details = () => {
       </Content>
     </Container>
   );
-};
+}
 
 export { Details };
