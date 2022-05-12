@@ -7,10 +7,6 @@ export const Container = styled.div`
 `;
 
 export const HeaderPage = styled.div`
-  /* display: flex;
-  /* justify-content: space-between; */
-  /*margin-bottom: 30px; */
-
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -19,18 +15,7 @@ export const HeaderPage = styled.div`
 
 export const PageLink = styled.div`
   display: flex;
-  margin: 0;
-  padding: 0;
-  justify-content: right;
-  /* display: flex;
-  align-items: center;
-  color: #ffffff;
-  font-size: 15px; */
-
-  svg {
-    margin-right: 15px;
-    margin-left: 15px;
-  }
+  gap: 100px;
 `;
 
 export const Image = styled.img`
@@ -95,6 +80,16 @@ export const AbilityListItem = styled.li`
   img {
     max-width: 25px;
   }
+`;
+
+export const Button = styled.button`
+  border-radius: 10px;
+  padding: 5px;
+  background-color: #babac0;
+  padding: 5px 15px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
 `;
 
 export const ImageLogo = styled.div``;

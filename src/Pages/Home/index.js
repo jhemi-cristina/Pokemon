@@ -1,12 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from "react";
 import { useMemo } from "react";
+import { Link } from "react-router-dom";
 import { Input } from "Components/Input";
 import { Card } from "Components/Card";
 import { getParamsPage } from "./Functions/getParamsPage";
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import Logo from "Assets/logo.svg";
 import pokeball from "Assets/pokeball.png";
-import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import {
   Container,
   Content,
@@ -18,7 +19,6 @@ import {
   SectionRight,
   Title,
 } from "./styles";
-import { Link } from "react-router-dom";
 import { getPokemons } from "./Functions/getPokemons";
 
 const Home = () => {
@@ -77,7 +77,7 @@ const Home = () => {
             ?.map((item, index) => (
               <Link to={`/details/${index + 1}`} key={index}>
                 <Card className="poke-item">
-                  {item["name"]} <img src={pokeball} />
+                  {item["name"]} <img src={pokeball} alt="Pokebolla" />
                 </Card>
               </Link>
             ))}

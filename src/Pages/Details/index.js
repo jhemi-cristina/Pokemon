@@ -3,6 +3,7 @@ import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import {
   AbilityList,
   AbilityListItem,
+  Button,
   Container,
   Content,
   Description,
@@ -86,18 +87,16 @@ function Details() {
 
         <PageLink>
           <Link to={`/details/${Number(id) - 1}`}>
-            <button disabled={id === "1"} onClick={() => pageReplace()}>
+            <Button disabled={id === "1"} onClick={() => pageReplace()}>
               <FaChevronLeft />
               Ver anterior
-            </button>
+            </Button>
           </Link>
-        </PageLink>
-        <PageLink>
           <Link to={`/details/${Number(id) + 1}`} onClick={() => pageReplace()}>
-            <button>
+            <Button>
               Ir para o Próximo
               <FaChevronRight />
-            </button>
+            </Button>
           </Link>
         </PageLink>
       </HeaderPage>
@@ -125,7 +124,7 @@ function Details() {
             <AbilityList>
               {abilities?.map((item) => (
                 <AbilityListItem key={item?.id}>
-                  <img src={pokeball} /> {item?.name}
+                  <img src={pokeball} alt="Pokebolla" /> {item?.name}
                 </AbilityListItem>
               ))}
             </AbilityList>
@@ -135,7 +134,7 @@ function Details() {
             <AbilityList>
               {variationsList?.map((item) => (
                 <AbilityListItem key={item?.id}>
-                  <img src={pokeball} /> {item?.name}
+                  <img src={pokeball} alt="Pokebolla" /> {item?.name}
                 </AbilityListItem>
               ))}
             </AbilityList>
