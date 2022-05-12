@@ -26,17 +26,13 @@ import { Loader } from "Components/Loader";
 import { loaderImage } from "./Functions/loader";
 
 const Details = () => {
-  // const history = useHistory();
   const { id } = useParams();
   const [pokemon, setPokemon] = useState({});
-  // const [pokeId, setPokeId] = useState(null);
   const [pokeImage, setPokeImage] = useState(null);
   const [abilities, setAbilities] = useState(null);
   const [variations, setVariations] = useState(null);
   const [variationsList, setVariationsList] = useState(null);
   const [loader, setLoader] = useState(true);
-  const [prevPage, setPrevPage] = useState(null);
-  const [nextPage, setNextPage] = useState(null);
 
   async function getPokemonData() {
     const response = await api.get(`/pokemon/${id}`);
@@ -50,10 +46,6 @@ const Details = () => {
     getPokemonData();
     loaderImage(setLoader);
   }, []);
-
-  useEffect(() => {
-    if (nextPage) getPokemonData();
-  }, [nextPage]);
 
   async function getPokemonsVariantions() {
     const response = await api.get(`/evolution-chain/${id}`);
@@ -71,17 +63,13 @@ const Details = () => {
   useMemo(() => {
     if (id && variations) {
       setVariationsList(getVariations(variations));
-      // setNextPage(id + 1);
     }
   }, [variations]);
 
-  function teste() {
-    // setNextPage(id + 1);
-    // window.location.replace();
-    // history.push("/details/2");
+  function pageReplace() {
+    window.location.replace();
   }
 
-  console.log({ id, nextPage });
   return (
     <Container>
       <Footer>
@@ -95,18 +83,20 @@ const Details = () => {
       </Footer>
       <HeaderPage>
         <PageLink>
-          <Link to="/">
-            <FaChevronLeft />
-            Voltar
+          <Link to={`/details/${Number(id) - 1}`}>
+            <button disabled={id === "1"} onClick={() => pageReplace()}>
+              <FaChevronLeft />
+              Ver anterior
+            </button>
           </Link>
         </PageLink>
         <PageLink>
-          <div onClick={() => teste()}>
-            Ir para o Próximo
-            <FaChevronRight />
-          </div>
-
-          {/* <Link to={`/details/${nextPage}`}>Teste {nextPage}</Link> */}
+          <Link to={`/details/${Number(id) + 1}`} onClick={() => pageReplace()}>
+            <buttom>
+              Ir para o Próximo
+              <FaChevronRight />
+            </buttom>
+          </Link>
         </PageLink>
       </HeaderPage>
 
