@@ -15,6 +15,7 @@ export const HeaderPage = styled.div`
 export const PageLink = styled.div`
   display: flex;
   align-items: center;
+  justify-content: center;
   color: #ffffff;
   font-size: 15px;
 

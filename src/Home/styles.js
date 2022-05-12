@@ -26,7 +26,7 @@ export const Content = styled.div`
   padding: 40px;
   border-radius: 6px;
   margin-top: 40px;
-  min-height: 300px;
+  min-height: 600px;
 
   Input {
     justify-content: flex-end;

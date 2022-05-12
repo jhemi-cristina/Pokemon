@@ -9,6 +9,7 @@ import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import {
   Container,
   Content,
+  DecorationImage,
   HeaderPage,
   Image,
   PokeList,
@@ -23,6 +24,7 @@ const Home = () => {
   const [prevPage, setPrevPage] = useState("?offset=0&limit=50");
   const [previous, setPrevious] = useState(null);
   const [advance, setAdvance] = useState("?offset=50&limit=50");
+  const [inputSearch, setInputSearch] = useState("");
 
   async function getPrevPokemons() {
     const {
@@ -58,6 +60,8 @@ const Home = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  console.log("inputSearch", inputSearch);
+
   return (
     <Container>
       <HeaderPage>
@@ -72,15 +76,25 @@ const Home = () => {
 
       <Content>
         <SectionRight>
-          <Input placeholder="Pesquise o Pokemon desejado...." />
+          <Input
+            value={inputSearch}
+            onChange={(e) => setInputSearch(e.target.value)}
+            placeholder="Pesquise o nome ou Id do Pokemon ...."
+          />
         </SectionRight>
 
         <PokeList>
-          {pokemons?.map((item, index) => (
-            <Link to={`/details/${index + 1}`} key={index}>
-              <Card className="poke-item">{item["name"]}</Card>
-            </Link>
-          ))}
+          {pokemons
+            ?.filter(
+              (item, index) =>
+                item?.name?.includes(inputSearch?.toLowerCase()) ||
+                index + 1 === Number(inputSearch)
+            )
+            ?.map((item, index) => (
+              <Link to={`/details/${index + 1}`} key={index}>
+                <Card className="poke-item">{item["name"]}</Card>
+              </Link>
+            ))}
         </PokeList>
         <SectionRight>
           <button

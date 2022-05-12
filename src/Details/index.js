@@ -38,7 +38,6 @@ const Details = () => {
     const response = await api.get(`/pokemon/${id}`);
 
     setPokemon(response.data);
-    // setPokeId(response.data.id);
   }
   // console.log("DAta", pokemon);
 
