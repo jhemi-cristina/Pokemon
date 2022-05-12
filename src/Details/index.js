@@ -24,7 +24,7 @@ import { getAbilities } from "./Functions/getAbilities";
 import { getVariations } from "./Functions/getVariations";
 import { Loader } from "Components/Loader";
 import { loaderImage } from "./Functions/loader";
-import { pokeball } from "Assets/pokeball.png";
+import pokeball from "Assets/pokeball.png";
 
 function Details() {
   const { id } = useParams();
@@ -124,7 +124,9 @@ function Details() {
             <SubTitle>HABILIDADES:</SubTitle>
             <AbilityList>
               {abilities?.map((item) => (
-                <AbilityListItem key={item?.id}>{item?.name}</AbilityListItem>
+                <AbilityListItem key={item?.id}>
+                  <img src={pokeball} /> {item?.name}
+                </AbilityListItem>
               ))}
             </AbilityList>
             {variationsList?.length !== 0 ? (
@@ -132,7 +134,9 @@ function Details() {
             ) : null}
             <AbilityList>
               {variationsList?.map((item) => (
-                <AbilityListItem key={item?.id}>{item?.name}</AbilityListItem>
+                <AbilityListItem key={item?.id}>
+                  <img src={pokeball} /> {item?.name}
+                </AbilityListItem>
               ))}
             </AbilityList>
           </PokeBox>

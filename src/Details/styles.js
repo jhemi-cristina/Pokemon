@@ -87,6 +87,14 @@ export const AbilityList = styled.ul`
 
 export const AbilityListItem = styled.li`
   line-height: 40px;
+  list-style-type: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  img {
+    max-width: 25px;
+  }
 `;
 
 export const ImageLogo = styled.div``;
