@@ -4,6 +4,7 @@ export const Container = styled.div`
   background-color: #323232;
   min-height: 90vh;
   padding: 40px;
+  justify-content: space-between;
 `;
 
 export const HeaderPage = styled.div``;
@@ -39,9 +40,40 @@ export const PokeList = styled.div`
   flex-wrap: wrap;
   justify-content: space-between;
   margin-bottom: 50px;
+
+  .poke-item {
+    padding-left: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #323232;
+    font-weight: 700;
+    text-transform: capitalize;
+
+    img {
+      max-width: 35px;
+    }
+  }
 `;
 
 export const SectionRight = styled.div`
   display: flex;
   justify-content: right;
+`;
+
+export const Pagination = styled.div`
+  button:first-child {
+    margin-right: 20px;
+  }
+`;
+
+export const Footer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  img {
+    opacity: 0.5;
+    max-width: 100px;
+  }
 `;

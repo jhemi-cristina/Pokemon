@@ -9,6 +9,7 @@ import {
   Footer,
   HeaderPage,
   Image,
+  ImageLogo,
   PageLink,
   PokeBox,
   PokeImage,
@@ -71,7 +72,7 @@ const Details = () => {
 
   return (
     <Container>
-      <Footer>
+      <ImageLogo>
         <Link to="/">
           <Image
             src={Logo}
@@ -79,7 +80,7 @@ const Details = () => {
             className="logo"
           />
         </Link>
-      </Footer>
+      </ImageLogo>
       <HeaderPage>
         <PageLink>
           <Link to={`/details/${Number(id) - 1}`}>
@@ -91,10 +92,10 @@ const Details = () => {
         </PageLink>
         <PageLink>
           <Link to={`/details/${Number(id) + 1}`} onClick={() => pageReplace()}>
-            <buttom>
+            <button>
               Ir para o Próximo
               <FaChevronRight />
-            </buttom>
+            </button>
           </Link>
         </PageLink>
       </HeaderPage>

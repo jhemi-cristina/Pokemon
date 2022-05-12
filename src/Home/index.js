@@ -1,22 +1,25 @@
-import { api } from "Services/api";
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from "react";
 import { useMemo } from "react";
 import { Input } from "Components/Input";
 import { Card } from "Components/Card";
 import { getParamsPage } from "./Functions/getParamsPage";
 import Logo from "Assets/logo.svg";
+import pokeball from "Assets/pokeball.png";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import {
   Container,
   Content,
-  DecorationImage,
+  Footer,
   HeaderPage,
   Image,
+  Pagination,
   PokeList,
   SectionRight,
   Title,
 } from "./styles";
 import { Link } from "react-router-dom";
+import { getPokemons } from "./Functions/getPokemons";
 
 const Home = () => {
   const [pokemons, setPokemons] = useState([]);
@@ -26,41 +29,22 @@ const Home = () => {
   const [advance, setAdvance] = useState("?offset=50&limit=50");
   const [inputSearch, setInputSearch] = useState("");
 
-  async function getPrevPokemons() {
-    const {
-      data: { results, previous, next },
-    } = await api.get(`/pokemon/${prevPage}`);
-    setPokemons(results);
-    setPrevious(previous);
-    setNextPage(next);
-  }
-
-  async function getNextPokemons() {
-    const {
-      data: { results, previous, next },
-    } = await api.get(`/pokemon/${advance}`);
-    setPokemons(results);
-    setPrevious(previous);
-    setNextPage(next);
+  function getNextAndPrevPokemons(data) {
+    getPokemons({ filter: data, setPokemons, setPrevious, setNextPage });
   }
 
   useMemo(() => {
     if (nextPage) setAdvance(getParamsPage(nextPage));
   }, [nextPage]);
 
+  console.log("nextPage", nextPage);
   useMemo(() => {
     if (previous) setPrevPage(getParamsPage(previous));
   }, [previous]);
 
-  // console.log("previous", previous);
-  // console.log("nextPage", nextPage);
-
   useEffect(() => {
-    getNextPokemons();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    getNextAndPrevPokemons(advance);
   }, []);
-
-  console.log("inputSearch", inputSearch);
 
   return (
     <Container>
@@ -92,24 +76,32 @@ const Home = () => {
             )
             ?.map((item, index) => (
               <Link to={`/details/${index + 1}`} key={index}>
-                <Card className="poke-item">{item["name"]}</Card>
+                <Card className="poke-item">
+                  {item["name"]} <img src={pokeball} />
+                </Card>
               </Link>
             ))}
         </PokeList>
-        <SectionRight>
-          <button
-            onClick={() => getPrevPokemons()}
-            disabled={prevPage === "?offset=0&limit=50"}
-          >
-            <FaArrowLeft />
-          </button>
-          <button
-            onClick={() => getNextPokemons()}
-            disabled={advance === "?offset=1100&limit=26"}
-          >
-            <FaArrowRight />
-          </button>
-        </SectionRight>
+        <Footer>
+          <img
+            src={Logo}
+            alt="Logo do Pokemon com a cor amarela e bordas azuis"
+          />
+          <Pagination>
+            <button
+              onClick={() => getNextAndPrevPokemons(prevPage)}
+              disabled={prevPage === "?offset=0&limit=50"}
+            >
+              <FaArrowLeft />
+            </button>
+            <button
+              onClick={() => getNextAndPrevPokemons(advance)}
+              disabled={advance === "?offset=1100&limit=26"}
+            >
+              <FaArrowRight />
+            </button>
+          </Pagination>
+        </Footer>
       </Content>
     </Container>
   );

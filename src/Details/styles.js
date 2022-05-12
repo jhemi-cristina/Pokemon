@@ -2,14 +2,14 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   background-color: #323232;
-  min-height: 60vh;
-  padding: 60px;
+  min-height: 90vh;
+  padding: 50px;
 `;
 
 export const HeaderPage = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-bottom: 50px;
+  margin-bottom: 30px;
 `;
 
 export const PageLink = styled.div`
@@ -36,7 +36,7 @@ export const Content = styled.div`
 `;
 
 export const Title = styled.h1`
-  margin-bottom: 70px;
+  margin-bottom: 50px;
   font-size: 50px;
   color: #ffcb05;
 `;
@@ -47,7 +47,7 @@ export const SubTitle = styled.h2`
 
 export const Description = styled.div`
   display: flex;
-  /* justify-content: space-between; */
+
   div {
     min-width: 50%;
   }
@@ -77,6 +77,6 @@ export const AbilityListItem = styled.li`
   line-height: 40px;
 `;
 
-export const Footer = styled.div`
-  opacity: 0.5;
+export const ImageLogo = styled.div`
+  /* opacity: 0.5; */
 `;
