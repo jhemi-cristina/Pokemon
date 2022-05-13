@@ -5,6 +5,10 @@ export const Container = styled.div`
   min-height: 90vh;
   padding: 40px;
   justify-content: space-between;
+
+  @media (max-width: 630px) {
+    padding: 20px;
+  }
 `;
 
 export const HeaderPage = styled.div``;
@@ -59,11 +63,16 @@ export const PokeList = styled.div`
 export const SectionRight = styled.div`
   display: flex;
   justify-content: right;
+
+  @media (max-width: 630px) {
+    max-width: 400%;
+    min-width: 230px;
+  }
 `;
 
 export const Pagination = styled.div`
-  button:first-child {
-    margin-right: 20px;
+  button {
+    margin: 15px 15px;
   }
 `;
 
@@ -75,5 +84,15 @@ export const Footer = styled.div`
   img {
     opacity: 0.5;
     max-width: 100px;
+  }
+
+  @media (max-width: 630px) {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+    img {
+      display: none;
+    }
   }
 `;

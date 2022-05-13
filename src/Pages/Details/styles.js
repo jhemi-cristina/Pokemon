@@ -11,17 +11,40 @@ export const HeaderPage = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-bottom: 101px;
+
+  @media (max-width: 630px) {
+    max-width: 100%;
+    min-width: 230px;
+    margin-bottom: 50px;
+  }
 `;
 
 export const PageLink = styled.div`
   display: flex;
   gap: 100px;
+
+  @media (max-width: 630px) {
+    max-width: 100%;
+    min-width: 230px;
+    display: flex;
+    justify-content: space-between;
+    gap: inherit;
+
+    Button {
+      padding: 3px;
+      margin: 10px;
+    }
+  }
 `;
 
 export const Image = styled.img`
   display: flex;
   margin: 0 auto;
   width: 130px;
+
+  @media (max-width: 630px) {
+    display: none;
+  }
 `;
 
 export const Content = styled.div`
@@ -48,12 +71,22 @@ export const Description = styled.div`
   div {
     min-width: 20%;
   }
+
+  @media (max-width: 700px) {
+    max-width: 100%;
+    min-width: 230px;
+    display: block;
+  }
 `;
 
 export const PokeImage = styled.img`
   border-radius: 20px;
   max-width: 300px;
   width: 100%;
+
+  @media (max-width: 630px) {
+    width: 50%;
+  }
 `;
 
 export const PokeBox = styled.div`
