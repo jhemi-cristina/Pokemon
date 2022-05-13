@@ -26,9 +26,11 @@ import { getVariations } from "./Functions/getVariations";
 import { Loader } from "Components/Loader";
 import { loaderImage } from "./Functions/loader";
 import pokeball from "Assets/pokeball.png";
+import { useCallback } from "react";
 
 function Details() {
   const { id } = useParams();
+  const [pokeName, setPokeName] = useState(null);
   const [pokemon, setPokemon] = useState({});
   const [pokeImage, setPokeImage] = useState(null);
   const [abilities, setAbilities] = useState(null);
@@ -36,18 +38,13 @@ function Details() {
   const [variationsList, setVariationsList] = useState(null);
   const [loader, setLoader] = useState(true);
 
-  async function getPokemonData() {
+  const getPokemonData = useCallback(async () => {
     const response = await api.get(`/pokemon/${id}`);
 
-    setPokemon(response.data);
-  }
+    setPokemon(response?.data);
+    setPokeName(response?.data?.name);
+  }, [id]);
   // console.log("DAta", pokemon);
-  console.log("variationsList", variationsList);
-
-  useEffect(() => {
-    getPokemonData();
-    loaderImage(setLoader);
-  }, []);
 
   async function getPokemonsVariantions() {
     const response = await api.get(`/evolution-chain/${id}`);
@@ -70,7 +67,13 @@ function Details() {
 
   function pageReplace() {
     window.location.replace();
+    getPokemonData();
   }
+
+  useEffect(() => {
+    getPokemonData();
+    loaderImage(setLoader);
+  }, [id]);
 
   return (
     <Container>
@@ -87,6 +90,7 @@ function Details() {
 
         <PageLink>
           <Link to={`/details/${Number(id) - 1}`}>
+            {/* <Button disabled={id === "1"} onClick={() => getPokemonData()}> */}
             <Button disabled={id === "1"} onClick={() => pageReplace()}>
               <FaChevronLeft />
               Ver anterior
@@ -102,9 +106,7 @@ function Details() {
       </HeaderPage>
 
       <Content>
-        <Title>
-          {convertName(pokemon?.name ?? "Pokemon não identificado")}
-        </Title>
+        <Title>{convertName(pokeName ?? "Pokemon não identificado")}</Title>
         <Description>
           <PokeBox>
             {loader ? (

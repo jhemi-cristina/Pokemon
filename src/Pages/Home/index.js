@@ -20,6 +20,7 @@ import {
   Title,
 } from "./styles";
 import { getPokemons } from "./Functions/getPokemons";
+import { getPokeId } from "./Functions/getPokeId";
 
 const Home = () => {
   const [pokemons, setPokemons] = useState([]);
@@ -33,6 +34,7 @@ const Home = () => {
     getPokemons({ filter: data, setPokemons, setPrevious, setNextPage });
   }
 
+  console.log("pokemons", pokemons);
   useMemo(() => {
     if (nextPage) setAdvance(getParamsPage(nextPage));
   }, [nextPage]);
@@ -43,7 +45,7 @@ const Home = () => {
   }, [previous]);
 
   useEffect(() => {
-    getNextAndPrevPokemons(advance);
+    getNextAndPrevPokemons(prevPage);
   }, []);
 
   return (
@@ -70,14 +72,18 @@ const Home = () => {
         <PokeList>
           {pokemons
             ?.filter(
-              (item, index) =>
+              (item) =>
                 item?.name?.includes(inputSearch?.toLowerCase()) ||
-                index + 1 === Number(inputSearch)
+                getPokeId(item.url) === Number(inputSearch)
             )
-            ?.map((item, index) => (
-              <Link to={`/details/${index + 1}`} key={index}>
+            ?.map((item) => (
+              <Link
+                to={`/details/${getPokeId(item.url)}`}
+                key={getPokeId(item.url)}
+              >
+                {console.log(getPokeId(item.url))}
                 <Card className="poke-item">
-                  {item["name"]} <img src={pokeball} alt="Pokebolla" />
+                  {item.name} <img src={pokeball} alt="Pokebolla" />
                 </Card>
               </Link>
             ))}
