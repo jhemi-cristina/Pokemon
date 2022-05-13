@@ -31,8 +31,8 @@ export const PageLink = styled.div`
     gap: inherit;
 
     Button {
-      padding: 3px;
-      margin: 10px;
+      padding: 0px;
+      margin: 0px;
     }
   }
 `;
@@ -43,7 +43,8 @@ export const Image = styled.img`
   width: 130px;
 
   @media (max-width: 630px) {
-    display: none;
+    width: 85px;
+    margin-right: 1px;
   }
 `;
 
