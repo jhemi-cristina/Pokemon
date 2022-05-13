@@ -65,11 +65,6 @@ function Details() {
     }
   }, [variations]);
 
-  function pageReplace() {
-    window.location.replace();
-    getPokemonData();
-  }
-
   useEffect(() => {
     getPokemonData();
     loaderImage(setLoader);
@@ -90,13 +85,15 @@ function Details() {
 
         <PageLink>
           <Link to={`/details/${Number(id) - 1}`}>
-            {/* <Button disabled={id === "1"} onClick={() => getPokemonData()}> */}
-            <Button disabled={id === "1"} onClick={() => pageReplace()}>
+            <Button disabled={id === "1"} onClick={() => getPokemonData()}>
               <FaChevronLeft />
               Ver anterior
             </Button>
           </Link>
-          <Link to={`/details/${Number(id) + 1}`} onClick={() => pageReplace()}>
+          <Link
+            to={`/details/${Number(id) + 1}`}
+            onClick={() => getPokemonData()}
+          >
             <Button>
               Ir para o Próximo
               <FaChevronRight />

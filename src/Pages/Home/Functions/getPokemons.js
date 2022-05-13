@@ -9,7 +9,7 @@ export async function getPokemons({
   const {
     data: { results, previous, next },
   } = await api.get(`/pokemon/${filter}`);
+  setNextPage(next);
   setPokemons(results);
   setPrevious(previous);
-  setNextPage(next);
 }

@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useMemo } from "react";
 import { Link } from "react-router-dom";
 import { Input } from "Components/Input";
@@ -20,7 +20,7 @@ import {
   Title,
 } from "./styles";
 import { getPokemons } from "./Functions/getPokemons";
-import { getPokeId } from "./Functions/getPokeId";
+import { getPokemonsList } from "./Functions/getPokemonsList";
 
 const Home = () => {
   const [pokemons, setPokemons] = useState([]);
@@ -30,23 +30,23 @@ const Home = () => {
   const [advance, setAdvance] = useState("?offset=50&limit=50");
   const [inputSearch, setInputSearch] = useState("");
 
-  function getNextAndPrevPokemons(data) {
-    getPokemons({ filter: data, setPokemons, setPrevious, setNextPage });
-  }
+  const pokemonsList = getPokemonsList(pokemons);
 
-  console.log("pokemons", pokemons);
+  const getNextAndPrevPokemons = useCallback((data) => {
+    getPokemons({ filter: data, setPokemons, setPrevious, setNextPage });
+  }, []);
+
   useMemo(() => {
     if (nextPage) setAdvance(getParamsPage(nextPage));
   }, [nextPage]);
 
-  console.log("nextPage", nextPage);
-  useMemo(() => {
-    if (previous) setPrevPage(getParamsPage(previous));
-  }, [previous]);
-
   useEffect(() => {
     getNextAndPrevPokemons(prevPage);
   }, []);
+
+  useEffect(() => {
+    if (pokemons && previous) setPrevPage(getParamsPage(previous));
+  }, [previous, pokemons]);
 
   return (
     <Container>
@@ -70,20 +70,16 @@ const Home = () => {
         </SectionRight>
 
         <PokeList>
-          {pokemons
+          {pokemonsList
             ?.filter(
               (item) =>
                 item?.name?.includes(inputSearch?.toLowerCase()) ||
-                getPokeId(item.url) === Number(inputSearch)
+                item?.id === Number(inputSearch)
             )
             ?.map((item) => (
-              <Link
-                to={`/details/${getPokeId(item.url)}`}
-                key={getPokeId(item.url)}
-              >
-                {console.log(getPokeId(item.url))}
+              <Link to={`/details/${item?.id}`} key={item?.id}>
                 <Card className="poke-item">
-                  {item.name} <img src={pokeball} alt="Pokebolla" />
+                  {item?.name} <img src={pokeball} alt="Pokebolla" />
                 </Card>
               </Link>
             ))}
@@ -96,13 +92,15 @@ const Home = () => {
           <Pagination>
             <button
               onClick={() => getNextAndPrevPokemons(prevPage)}
-              disabled={prevPage === "?offset=0&limit=50"}
+              disabled={pokemonsList[0]?.id === 1}
             >
               <FaArrowLeft />
             </button>
+            {pokemonsList[0]?.id} {"-"}
+            {pokemonsList[49]?.id}
             <button
               onClick={() => getNextAndPrevPokemons(advance)}
-              disabled={advance === "?offset=1100&limit=26"}
+              disabled={pokemonsList[49]?.id === 10202}
             >
               <FaArrowRight />
             </button>
